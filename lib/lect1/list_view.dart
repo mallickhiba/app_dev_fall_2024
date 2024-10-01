@@ -10,7 +10,6 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,17 +17,20 @@ class _ListPageState extends State<ListPage> {
       //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       //   title: Text(widget.title),
       // ),
-      body:  ListView.separated(
+      body: ListView.separated(
         itemCount: 14,
-        separatorBuilder: (context,index) => const Divider(color: Colors.grey,thickness: 0.5,),
-        itemBuilder: (context,index) =>  ListTile(
-            leading:  CircleAvatar(
-              child: Text(index.toString()),
-            ),
-            title: const Text('Intro Flutter widgets '),
-            subtitle: const Text('Read more about FLutter widget'),
-            trailing: const Icon(Icons.remove_red_eye),
+        separatorBuilder: (context, index) => const Divider(
+          color: Colors.grey,
+          thickness: 0.5,
+        ),
+        itemBuilder: (context, index) => ListTile(
+          leading: CircleAvatar(
+            child: Text(index.toString()),
           ),
+          title: const Text('Intro Flutter widgets '),
+          subtitle: const Text('Read more about FLutter widget'),
+          trailing: const Icon(Icons.remove_red_eye),
+        ),
       ),
     );
   }
