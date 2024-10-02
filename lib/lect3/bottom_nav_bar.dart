@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iba_course_2/lect3/job_list.dart';
 
-
 /// Flutter code sample for [BottomNavigationBar].
 
 void main() => runApp(const BottomNavigationBarExampleApp());
@@ -30,17 +29,14 @@ class _BottomNavigationBarExampleState
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
+  static final List<Widget> _widgetOptions = <Widget>[
+    const JobListState(),
+    const Text(
+      'Resume Page',
       style: optionStyle,
     ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
+    const Text(
+      'Settings Page',
       style: optionStyle,
     ),
   ];
@@ -55,8 +51,8 @@ class _BottomNavigationBarExampleState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
-      ),
+          // title: const Text('BottomNavigationBar Sample'),
+          ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

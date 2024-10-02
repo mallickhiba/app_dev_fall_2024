@@ -140,6 +140,12 @@ class _JobListState extends State<JobListState> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Jobs'),
+        actions: [
+          Icon(Icons.notifications_outlined),
+        ],
+      ),
       body: Center(
         child: FutureBuilder<List<Job>>(
           future: fetchAllJobs(),

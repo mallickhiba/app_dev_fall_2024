@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iba_course_2/lect2/custom_tab.dart';
+// import 'package:iba_course_2/lect2/custom_tab.dart';
 import 'package:iba_course_2/lect3/bottom_nav_bar.dart';
 
 void main() {
