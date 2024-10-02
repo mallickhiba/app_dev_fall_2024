@@ -19,13 +19,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
       body:  Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: TextField(
             maxLength: 10,
             decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 labelText: 'Password',
-                counter: Text('1/2'),
+                counter: const Text('1/2'),
                 errorText: _errorMsg
               ),
             obscureText: true,
