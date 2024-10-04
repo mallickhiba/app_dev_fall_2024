@@ -141,11 +141,28 @@ class _JobListState extends State<JobListState> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jobs'),
-        actions: [
-          Icon(Icons.notifications_outlined),
+        scrolledUnderElevation: 1,
+        backgroundColor: Colors.white, // Set the background color to white
+
+        title: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Text(
+            'Jobs',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.notifications_outlined),
+            tooltip: 'Notifications',
+            onPressed: () {
+              //add notif page
+            },
+          ),
         ],
       ),
+      backgroundColor: Colors.white, // Set the background color to white
+
       body: Center(
         child: FutureBuilder<List<Job>>(
           future: fetchAllJobs(),
@@ -156,51 +173,85 @@ class _JobListState extends State<JobListState> {
               return const Text('Failed to load jobs');
             } else if (snapshot.hasData) {
               final jobs = snapshot.data!;
-
               return ListView.builder(
-                padding: const EdgeInsets.all(12.0),
                 itemCount: jobs.length,
                 itemBuilder: (context, index) {
                   final job = jobs[index];
 
                   return Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 8.0), // Add vertical spacing
+                      vertical: 8.0,
+                      horizontal:
+                          16.0, // Add horizontal padding to control the box width
+                    ),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          // BoxShadow(
-                          //   color: Colors.grey.withOpacity(0.3),
-                          //   spreadRadius: 3,
-                          //   blurRadius: 5,
-                          //   offset: Offset(0, 3), // changes position of shadow
-                          // ),
-                        ],
-                      ),
-                      child: ListTile(
-                        leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            job.company.logo,
-                            width: 50,
-                            height: 50,
-                            fit: BoxFit.cover,
-                          ),
+                        color: Colors.white, // Set the background to white
+                        border: Border.all(
+                          color:
+                              Colors.grey.withOpacity(0.2), // Thin grey border
+                          width: 1.0,
                         ),
-                        title: Text(job.title),
-                        subtitle: Column(
+                        borderRadius:
+                            BorderRadius.circular(15), // Rounded corners
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(
+                            16.0), // Padding inside the Container
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(job.company.name),
-                            Text(
-                                '${job.location.nameEn}, ${job.workplaceType.nameEn}, ${job.type.nameEn}'),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.network(
+                                job.company.logo,
+                                width: 50,
+                                height: 50,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    job.title,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    job.company.name,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${job.location.nameEn} · ${job.workplaceType.nameEn} · ${job.type.nameEn}',
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 15),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Text(
+                                      timeago.format(
+                                          DateTime.parse(job.createdDate)),
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
-                        ),
-                        trailing: Text(
-                          timeago.format(DateTime.parse(job.createdDate)),
-                          style: TextStyle(color: Colors.grey),
                         ),
                       ),
                     ),
