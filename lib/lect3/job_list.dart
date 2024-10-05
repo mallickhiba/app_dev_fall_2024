@@ -186,6 +186,7 @@ class _JobListState extends State<JobListState> {
                       horizontal:
                           16.0, // Add horizontal padding to control the box width
                     ),
+
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white, // Set the background to white
@@ -259,6 +260,9 @@ class _JobListState extends State<JobListState> {
                     ),
                   );
                 },
+
+
+                
               );
             } else {
               return const Text('No jobs available');

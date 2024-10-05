@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iba_course_2/lect3/job_list.dart';
-
+// import 'package:iba_course_2/lect3/post_list.dart';
 /// Flutter code sample for [BottomNavigationBar].
 
 void main() => runApp(const BottomNavigationBarExampleApp());

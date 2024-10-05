@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iba_course_2/lect1/list_view.dart';
 import 'package:iba_course_2/lect2/snack_bar.dart';
-import 'package:iba_course_2/lect3/post_list.dart';
 import 'package:iba_course_2/lect3/job_list.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -56,7 +55,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
         body: const TabBarView(
           children: [
             JobListState(),
-            PostListState(),
             /*1*/ ListPage(title: 'List Page'),
             CustomSnackBar(),
           ],
