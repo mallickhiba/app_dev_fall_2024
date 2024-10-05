@@ -130,7 +130,9 @@ class _JobListState extends State<JobListState> {
 
     if (response.statusCode == 200) {
       List jsonResponse =
-          jsonDecode(response.body)['data'].map((data) => data['job']).toList();
+          jsonDecode(utf8.decode(response.body.codeUnits))['data']
+              .map((data) => data['job'])
+              .toList();
       return jsonResponse.map((job) => Job.fromJson(job)).toList();
     } else {
       throw Exception('Failed to load jobs');
@@ -205,12 +207,12 @@ class _JobListState extends State<JobListState> {
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.network(
                                 job.company.logo,
-                                width: 50,
-                                height: 50,
+                                width: 55,
+                                height: 55,
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            const SizedBox(width: 16),
+                            const SizedBox(width: 10),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
