@@ -19,7 +19,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       body:  Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: TextField(
             maxLength: 10,
             decoration: InputDecoration(

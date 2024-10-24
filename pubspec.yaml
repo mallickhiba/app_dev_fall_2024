@@ -10,6 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+<<<<<<< Updated upstream
+=======
+  http: ^1.2.2
+  provider: ^5.0.0
+>>>>>>> Stashed changes
 
   cupertino_icons: ^1.0.6
 
