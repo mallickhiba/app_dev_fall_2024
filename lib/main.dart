@@ -24,10 +24,3 @@ class MyApp extends StatelessWidget {
     );
       }
   }
-  // debugShowCheckedModeBanner: false,
-          // themeMode: provider.themeState,
-          // theme: ThemeData(brightness: Brightness.light),
-          // darkTheme: ThemeData(
-          //   iconTheme: IconThemeData(color:Colors.red),
-          //   brightness: Brightness.dark,
-          // ),
