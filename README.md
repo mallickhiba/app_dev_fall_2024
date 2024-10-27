@@ -1,16 +1,8 @@
-# iba_course_2
+# IBA Application Development for Mobile Devices - Fall 2024
 
-A new Flutter project.
+## Assignment 2
 
-## Getting Started
+A fully functional iOS calculator app using Flutter, implementing the Provider package for state management. 
+The app has basic calculator functionality and a feature to store and view calculation history.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Video is attached

@@ -3,7 +3,11 @@ import 'package:function_tree/function_tree.dart';
 
 class CalculatorProvider extends ChangeNotifier {
   String _display = '0';
+   List<String> _history = [];
+
   String get display => _display;
+  List<String> get history => _history;
+
   void setValue(String value) {
     if (_display == '0' && value != "=") {
       _display = value;
@@ -31,6 +35,7 @@ class CalculatorProvider extends ChangeNotifier {
       _display = result == result.toInt()
           ? result.toInt().toString()
           : result.toString();
+      _history.insert(0, "$expression = $_display"); //add to history list
     } catch (e) {
       _display = 'Error';
     }

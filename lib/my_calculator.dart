@@ -11,6 +11,7 @@ class MyCalculator extends StatefulWidget {
 
 class _MyCalculatorState extends State<MyCalculator> {
   Map<String, bool> buttonStates = {};
+
   void handleTap(String btntxt) {
     setState(() {
       buttonStates[btntxt] = true;
@@ -34,6 +35,26 @@ class _MyCalculatorState extends State<MyCalculator> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
+                //history
+                Expanded(
+                  child: ListView.builder(
+                    reverse: true,
+                    itemCount: provider.history.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            provider.history[index],
+                            style: const TextStyle(
+                                color: Colors.white70, fontSize: 20),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: SingleChildScrollView(
@@ -62,7 +83,7 @@ class _MyCalculatorState extends State<MyCalculator> {
                     numSymbolButton(Colors.grey[350]!, 'AC', Colors.black),
                     numSymbolButton(Colors.grey[350]!, '+/-', Colors.black),
                     numSymbolButton(Colors.grey[350]!, '%', Colors.black),
-                    numSymbolButton(Colors.amber[800]!, '/', Colors.white),
+                    numSymbolButton(Colors.amber[800]!, '÷', Colors.white),
                   ],
                 ),
                 const SizedBox(height: 10),
