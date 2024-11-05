@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:iba_course_2/lect1/list_view.dart';
+import 'package:iba_course_2/timer/view/timer_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const App());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Timer',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        appBarTheme: AppBarTheme(),
-        useMaterial3: false,
+        colorScheme: const ColorScheme.light(
+          primary: Color.fromRGBO(72, 74, 126, 1),
+        ),
       ),
-      home: const ListPage(title: 'Class#1'),
+      home: const TimerPage(),
     );
   }
 }
