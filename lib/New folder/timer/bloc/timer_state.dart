@@ -1,4 +1,4 @@
-part of 'timer_bloc.dart';
+import 'package:equatable/equatable.dart';
 
 sealed class TimerState extends Equatable {
   const TimerState(this.duration);

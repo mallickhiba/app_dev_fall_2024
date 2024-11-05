@@ -1,34 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iba_course_2/ticker.dart';
-import 'package:iba_course_2/timer/timer.dart';
+import 'package:iba_course_2/New%20folder/ticker.dart';
+import 'package:iba_course_2/New%20folder/timer/bloc/timer_state.dart';
+import 'package:iba_course_2/New%20folder/timer/timer.dart';
 
 class TimerPage extends StatelessWidget {
-  const TimerPage({super.key});
-
+  const TimerPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => TimerBloc(ticker: const Ticker()),
+      create: (_) => TimerBloc(ticker: Ticker()),
       child: const TimerView(),
     );
   }
 }
 
 class TimerView extends StatelessWidget {
-  const TimerView({super.key});
-
+  const TimerView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(title: const Text('Flutter Timer')),
       body: Stack(
         children: [
-          Background(),
+          const Background(),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const <Widget>[
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 100),
+                padding: EdgeInsets.symmetric(vertical: 100.0),
                 child: Center(child: TimerText()),
               ),
               Actions(),
@@ -41,20 +42,35 @@ class TimerView extends StatelessWidget {
 }
 
 class TimerText extends StatelessWidget {
-  const TimerText({super.key});
-
+  const TimerText({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final duration = context.select((TimerBloc bloc) => bloc.state.duration);
     final minutesStr =
         ((duration / 60) % 60).floor().toString().padLeft(2, '0');
-    final secondsStr = (duration % 60).toString().padLeft(2, '0');
+    final secondsStr = (duration % 60).floor().toString().padLeft(2, '0');
     return Text(
       '$minutesStr:$secondsStr',
-      style: Theme.of(context)
-          .textTheme
-          .displayLarge
-          ?.copyWith(fontWeight: FontWeight.w500),
+      style: Theme.of(context).textTheme.displayLarge,
+    );
+  }
+}
+
+class Background extends StatelessWidget {
+  const Background({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.blue.shade50,
+            Colors.blue.shade500,
+          ],
+        ),
+      ),
     );
   }
 }
@@ -82,65 +98,38 @@ class Actions extends StatelessWidget {
               TimerRunInProgress() => [
                   FloatingActionButton(
                     child: const Icon(Icons.pause),
-                    onPressed: () {
-                      context.read<TimerBloc>().add(const TimerPaused());
-                    },
+                    onPressed: () =>
+                        context.read<TimerBloc>().add(const TimerPaused()),
                   ),
                   FloatingActionButton(
                     child: const Icon(Icons.replay),
-                    onPressed: () {
-                      context.read<TimerBloc>().add(const TimerReset());
-                    },
+                    onPressed: () =>
+                        context.read<TimerBloc>().add(const TimerReset()),
                   ),
                 ],
               TimerRunPause() => [
                   FloatingActionButton(
                     child: const Icon(Icons.play_arrow),
-                    onPressed: () {
-                      context.read<TimerBloc>().add(const TimerResumed());
-                    },
+                    onPressed: () =>
+                        context.read<TimerBloc>().add(const TimerResumed()),
                   ),
                   FloatingActionButton(
                     child: const Icon(Icons.replay),
-                    onPressed: () {
-                      context.read<TimerBloc>().add(const TimerReset());
-                    },
+                    onPressed: () =>
+                        context.read<TimerBloc>().add(const TimerReset()),
                   ),
                 ],
               TimerRunComplete() => [
                   FloatingActionButton(
                     child: const Icon(Icons.replay),
-                    onPressed: () {
-                      context.read<TimerBloc>().add(const TimerReset());
-                    },
+                    onPressed: () =>
+                        context.read<TimerBloc>().add(const TimerReset()),
                   ),
                 ]
-            },
+            }
           ],
         );
       },
-    );
-  }
-}
-
-class Background extends StatelessWidget {
-  const Background({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.blue.shade50,
-              Colors.blue.shade500,
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
