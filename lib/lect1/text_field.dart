@@ -16,29 +16,28 @@ class _CustomTextFieldState extends State<CustomTextField> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Text Field"),
       ),
-      body:  Column(
+      body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: TextField(
-            maxLength: 10,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password',
-                counter: Text('1/2'),
-                errorText: _errorMsg
-              ),
-            obscureText: true,
-            autocorrect: true,
-            autofocus: true,
-            cursorColor: Colors.red,
+              maxLength: 10,
+              decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  labelText: 'Password',
+                  counter: const Text('1/2'),
+                  errorText: _errorMsg),
+              obscureText: true,
+              autocorrect: true,
+              autofocus: true,
+              cursorColor: Colors.red,
             ),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
+      floatingActionButton: FloatingActionButton(onPressed: () {
         setState(() {
-          _errorMsg  = null;
+          _errorMsg = null;
         });
       }),
     );
