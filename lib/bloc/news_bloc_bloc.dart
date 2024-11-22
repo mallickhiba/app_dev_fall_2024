@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:iba_course_2/news_service.dart';
-import 'package:meta/meta.dart';
 
 part 'news_bloc_event.dart';
 part 'news_bloc_state.dart';

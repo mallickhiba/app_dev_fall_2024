@@ -11,17 +11,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'News App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        appBarTheme: AppBarTheme(),
         useMaterial3: false,
       ),
       home: BlocProvider(
         create: (context) => NewsBloc(NewsService()),
-        child: NewsPage(),
+        child: const NewsPage(),
       ),
     );
   }
