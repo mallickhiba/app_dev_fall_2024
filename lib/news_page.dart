@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iba_course_2/bloc/news_bloc_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:http/http.dart' as http;
 
 class NewsPage extends StatelessWidget {
   const NewsPage({super.key});
@@ -14,9 +15,9 @@ class NewsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Row(
+        title: Row(
           children: [
-            Column(
+            const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Headline News',
@@ -25,8 +26,8 @@ class NewsPage extends StatelessWidget {
                     style: TextStyle(color: Colors.black, fontSize: 12)),
               ],
             ),
-            Spacer(),
-            Icon(Icons.newspaper, color: Colors.black),
+            const Spacer(),
+            Image.asset('assets/news.png', width: 24, height: 24),
           ],
         ),
       ),
@@ -58,6 +59,16 @@ class NewsPage extends StatelessWidget {
 class NewsTile extends StatelessWidget {
   final dynamic article;
 
+  Future<bool> isImageValid(String? url) async {
+    if (url == null) return false;
+    try {
+      final response = await http.head(Uri.parse(url));
+      return response.statusCode == 200;
+    } catch (e) {
+      return false;
+    }
+  }
+
   const NewsTile({super.key, required this.article});
 
   @override
@@ -81,32 +92,36 @@ class NewsTile extends StatelessWidget {
             builder: (context) => NewsDetailModal(article: article),
           ),
           child: ListTile(
-            leading: article['urlToImage'] != null
-                ? Image.network(
-                    article['urlToImage'],
-                    fit: BoxFit.cover,
-                    width: 80,
-                    height: 80,
-                    errorBuilder: (context, error, stackTrace) {
-                      return const Icon(Icons.broken_image,
-                          size: 80); // Fallback Icon
-                    },
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) {
-                        return child; // Image loaded successfully
-                      }
-                      return Shimmer.fromColors(
-                        baseColor: Colors.grey[300]!,
-                        highlightColor: Colors.grey[100]!,
-                        child: Container(
-                          width: 80,
-                          height: 80,
-                          color: Colors.grey,
-                        ),
-                      );
-                    },
-                  )
-                : const Icon(Icons.image, size: 60),
+            leading: SizedBox(
+              width: 80,
+              height: 80,
+              child: FutureBuilder<bool>(
+                future: isImageValid(article['urlToImage']),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        width: 80,
+                        height: 80,
+                        color: Colors.grey,
+                      ),
+                    );
+                  }
+                  if (snapshot.data == true) {
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(5.0),
+                      child: Image.network(
+                        article['urlToImage'],
+                        fit: BoxFit.cover,
+                      ),
+                    );
+                  }
+                  return const Icon(Icons.image, size: 60);
+                },
+              ),
+            ),
             title: Text(article['title'] ?? 'No Title'),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
