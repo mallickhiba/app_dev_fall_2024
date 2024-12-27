@@ -20,13 +20,12 @@ class MyElevatedButton extends StatelessWidget {
         onTap();
       },
       style: ButtonStyle(
-          padding:
-              MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(2)),
-          minimumSize: MaterialStateProperty.all<Size>(Size(width, height)),
-          foregroundColor: MaterialStatePropertyAll<Color>(
+          padding: WidgetStateProperty.all<EdgeInsets>(const EdgeInsets.all(2)),
+          minimumSize: WidgetStateProperty.all<Size>(Size(width, height)),
+          foregroundColor: WidgetStatePropertyAll<Color>(
               Theme.of(context).colorScheme.inverseSurface),
-          backgroundColor: MaterialStatePropertyAll<Color>(
-              Theme.of(context).colorScheme.background)),
+          backgroundColor: WidgetStatePropertyAll<Color>(
+              Theme.of(context).colorScheme.surface)),
       child: child,
     );
   }
