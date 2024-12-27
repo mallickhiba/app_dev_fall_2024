@@ -16,7 +16,7 @@ import 'package:iba_course_2/recommended_page.dart';
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   return GoldenToolkit.runWithConfiguration(
     () async {
-      await loadAppFonts();
+      // await loadAppFonts();
       await testMain();
     },
     config: GoldenToolkitConfiguration(
@@ -31,18 +31,18 @@ void main() {
   });
 
   testGoldens('RecommendedPage Golden Test', (WidgetTester tester) async {
-    // Widget to be tested
     var customWidget = const MaterialApp(
-      home: RecommendedPage(),
+      home: Scaffold(
+        body: RecommendedPage(),
+      ),
     );
 
-    // Pump the widget into the test environment
+    // pump (render)
     await tester.pumpWidgetBuilder(
       customWidget,
-      surfaceSize: const Size(400, 800), // Define the screen size
+      surfaceSize: const Size(400, 800), //adjust based on ur widget
     );
 
-    // Wait for animations or the UI to settle
     await tester.pumpAndSettle(const Duration(seconds: 2));
 
     // Capture the golden screenshot
