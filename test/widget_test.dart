@@ -5,17 +5,47 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:iba_course_2/recommended_page.dart';
 
-void main() {
-  testWidgets('RecommendedPage renders correctly', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: RecommendedPage()));
+Future<void> testExecutable(FutureOr<void> Function() testMain) async {
+  return GoldenToolkit.runWithConfiguration(
+    () async {
+      await loadAppFonts();
+      await testMain();
+    },
+    config: GoldenToolkitConfiguration(
+      skipGoldenAssertion: () => !Platform.isMacOS,
+    ),
+  );
+}
 
-    // Verify the widget tree
-    expect(find.text('Recommended for your devices'), findsOneWidget);
-    expect(find.text('See All'), findsOneWidget);
-    expect(find.text('AirPods Max — Silver'), findsOneWidget);
+void main() {
+  setUpAll(() async {
+    await testExecutable(() {});
+  });
+
+  testGoldens('RecommendedPage Golden Test', (WidgetTester tester) async {
+    // Widget to be tested
+    var customWidget = const MaterialApp(
+      home: RecommendedPage(),
+    );
+
+    // Pump the widget into the test environment
+    await tester.pumpWidgetBuilder(
+      customWidget,
+      surfaceSize: const Size(400, 800), // Define the screen size
+    );
+
+    // Wait for animations or the UI to settle
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    // Capture the golden screenshot
+    await screenMatchesGolden(tester, 'recommended_page');
   });
 }
