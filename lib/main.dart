@@ -5,6 +5,7 @@ import 'package:iba_course_2/bloc/transactions_bloc.dart';
 import 'package:iba_course_2/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:iba_course_2/home_page.dart';
+import 'package:iba_course_2/recommended_page.dart';
 import 'package:iba_course_2/transaction_services.dart';
 
 void main() async {
@@ -28,9 +29,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/homepage',
+      initialRoute: '/recpage',
       routes: {
         '/homepage': (context) => const MyHomePage(),
+        '/recpage': (context) => const RecommendedPage(),
       },
     );
   }

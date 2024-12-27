@@ -31,20 +31,20 @@ class MyHomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header Section
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Monday',
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       '17 Nov',
                       style: TextStyle(
                           fontSize: 22,
@@ -53,7 +53,7 @@ class MyHomePage extends StatelessWidget {
                     ),
                     Text(
                       '\$2,983', // Replace with dynamic balance if needed
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.blue),
@@ -106,8 +106,8 @@ class MyHomePage extends StatelessWidget {
                                         radius: 25,
                                       )
                                     : const CircleAvatar(
-                                        child: Icon(Icons.image),
                                         radius: 25,
+                                        child: Icon(Icons.image),
                                       ),
                                 const SizedBox(width: 16),
 
