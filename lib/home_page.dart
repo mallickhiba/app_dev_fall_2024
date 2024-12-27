@@ -9,48 +9,161 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Transactions')),
-      body: BlocBuilder<TransactionsBloc, TransactionsState>(
-        builder: (context, state) {
-          if (state is TransactionsLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is TransactionsLoaded) {
-            final transactions = state.transactions;
-            return ListView.builder(
-              itemCount: transactions.length,
-              itemBuilder: (context, index) {
-                final transaction = transactions[index];
-                return ListTile(
-                  leading: transaction['imageUrl'] != null &&
-                          transaction['imageUrl'].isNotEmpty
-                      ? CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(transaction['imageUrl']),
-                          radius: 25,
-                        )
-                      : const CircleAvatar(
-                          child: Icon(Icons.image_not_supported),
-                          radius: 25,
-                        ),
-                  title: Text(transaction['to']),
-                  subtitle: Text(_formatDate(transaction['date'])),
-                  trailing: Text(
-                    transaction['amount'] > 0
-                        ? '+\$${transaction['amount']}'
-                        : '-\$${transaction['amount'].abs()}',
-                    style: TextStyle(
-                      color:
-                          transaction['amount'] > 0 ? Colors.green : Colors.red,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Go back to the previous screen
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.more_horiz),
+            onPressed: () {
+              // Perform overflow menu action
+            },
+          ),
+        ],
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header Section
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Monday',
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      '17 Nov',
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
                     ),
-                  ),
-                );
+                    Text(
+                      '\$2,983', // Replace with dynamic balance if needed
+                      style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const Divider(),
+
+          // Transaction List
+          Expanded(
+            child: BlocBuilder<TransactionsBloc, TransactionsState>(
+              builder: (context, state) {
+                if (state is TransactionsLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is TransactionsLoaded) {
+                  final transactions = state.transactions;
+                  return ListView.builder(
+                    itemCount: transactions.length,
+                    itemBuilder: (context, index) {
+                      final transaction = transactions[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                blurRadius: 6,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                // Transaction Icon or Image
+                                transaction['imageUrl'] != null &&
+                                        transaction['imageUrl'].isNotEmpty
+                                    ? CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                            transaction['imageUrl']),
+                                        radius: 25,
+                                      )
+                                    : const CircleAvatar(
+                                        child: Icon(Icons.image),
+                                        radius: 25,
+                                      ),
+                                const SizedBox(width: 16),
+
+                                // Transaction Details
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        transaction['to'],
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        _formatDate(transaction['date']),
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                // Transaction Amount
+                                Text(
+                                  transaction['amount'] > 0
+                                      ? '+\$${transaction['amount']}'
+                                      : '-\$${transaction['amount'].abs()}',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: transaction['amount'] > 0
+                                        ? Colors.green
+                                        : Colors.red,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                } else if (state is TransactionsError) {
+                  return Center(child: Text(state.message));
+                }
+                return const Center(child: Text('No transactions found.'));
               },
-            );
-          } else if (state is TransactionsError) {
-            return Center(child: Text(state.message));
-          }
-          return const Center(child: Text('No transactions found.'));
-        },
+            ),
+          ),
+        ],
       ),
     );
   }
