@@ -30,7 +30,7 @@ void main() {
     await testExecutable(() {});
   });
 
-  testGoldens('RecommendedPage Golden Test', (WidgetTester tester) async {
+  testGoldens('Expenses Golden Test', (WidgetTester tester) async {
     var customWidget = const MaterialApp(
       home: Scaffold(
         body: WeeklyExpensePage(),
@@ -46,6 +46,6 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 2));
 
     // Capture the golden screenshot
-    await screenMatchesGolden(tester, 'recommended_page');
+    await screenMatchesGolden(tester, 'ui-sc');
   });
 }

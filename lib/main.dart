@@ -5,7 +5,7 @@ import 'package:iba_course_2/bloc/juice_bloc/juice_bloc.dart';
 import 'package:iba_course_2/firebase_options.dart';
 import 'package:flutter/material.dart';
 // import 'package:iba_course_2/home_page.dart';
-import 'package:iba_course_2/juice_page.dart';
+import 'package:iba_course_2/juice.dart';
 import 'package:iba_course_2/weekly_expense.dart';
 import 'package:iba_course_2/juice_services.dart';
 
