@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iba_course_2/bloc/transactions_bloc.dart';
+import 'package:iba_course_2/bloc/transactions_bloc/transactions_bloc.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
