@@ -63,18 +63,12 @@ class JuicePage extends StatelessWidget {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                // Juice Icon or Image
-                                juice['imageUrl'] != null &&
-                                        juice['imageUrl'].isNotEmpty
-                                    ? CircleAvatar(
-                                        backgroundImage:
-                                            NetworkImage(juice['imageUrl']),
-                                        radius: 25,
-                                      )
-                                    : const CircleAvatar(
-                                        radius: 25,
-                                        child: Icon(Icons.image),
-                                      ),
+                                Image.asset(
+                                  'assets/juice.png',
+                                  height: 150,
+                                  width: 150,
+                                  fit: BoxFit.contain,
+                                ),
                                 const SizedBox(width: 16),
 
                                 // Juice Details
@@ -90,6 +84,12 @@ class JuicePage extends StatelessWidget {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
+                                      Text(
+                                        juice['grams'],
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
                                       const SizedBox(height: 4),
                                       Text(
                                         (juice['rating'] as double)
@@ -97,6 +97,58 @@ class JuicePage extends StatelessWidget {
                                         style: const TextStyle(
                                           fontSize: 14,
                                           color: Colors.grey,
+                                        ),
+                                      ),
+                                      Text(
+                                        (juice['reviews'] as double)
+                                            .toStringAsFixed(1),
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Text(
+                                        juice['description'],
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Delivery Time',
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {},
+                                        style: ElevatedButton.styleFrom(
+                                            iconColor: Colors.pink),
+                                        child: const Text(
+                                          'Add to cart',
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                      ),
+                                      Text(
+                                        juice['delivery_time'],
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      SizedBox(height: 15),
+                                      Text(
+                                        'Total Price',
+                                        style: const TextStyle(
+                                          fontSize: 7,
+                                        ),
+                                      ),
+                                      Text(
+                                        (juice['price'] as double)
+                                            .toStringAsFixed(2),
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ],

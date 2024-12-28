@@ -45,7 +45,6 @@ void main() {
 
     await tester.pumpAndSettle(const Duration(seconds: 2));
 
-    // Capture the golden screenshot
     await screenMatchesGolden(tester, 'ui-sc');
   });
 }
