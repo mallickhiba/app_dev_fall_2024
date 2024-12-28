@@ -6,7 +6,7 @@ import 'package:iba_course_2/firebase_options.dart';
 import 'package:flutter/material.dart';
 // import 'package:iba_course_2/home_page.dart';
 import 'package:iba_course_2/juice_page.dart';
-import 'package:iba_course_2/recommended_page.dart';
+import 'package:iba_course_2/weekly_expense.dart';
 import 'package:iba_course_2/juice_services.dart';
 
 void main() async {
@@ -29,10 +29,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/homepage',
+      initialRoute: '/exp',
       routes: {
-        '/homepage': (context) => const JuicePage(),
-        '/recpage': (context) => const RecommendedPage(),
+        '/juice': (context) => const JuicePage(),
+        '/exp': (context) => const WeeklyExpensePage(),
       },
     );
   }

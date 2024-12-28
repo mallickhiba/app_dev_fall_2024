@@ -15,9 +15,9 @@ class JuicePage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Text(
+        title: const Text(
           'Details',
-          style: const TextStyle(fontSize: 16, color: Colors.grey),
+          style: TextStyle(fontSize: 16, color: Colors.grey),
         ),
         actions: [
           IconButton(

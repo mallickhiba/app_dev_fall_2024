@@ -11,7 +11,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:iba_course_2/recommended_page.dart';
+import 'package:iba_course_2/weekly_expense.dart';
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   return GoldenToolkit.runWithConfiguration(
@@ -33,7 +33,7 @@ void main() {
   testGoldens('RecommendedPage Golden Test', (WidgetTester tester) async {
     var customWidget = const MaterialApp(
       home: Scaffold(
-        body: RecommendedPage(),
+        body: WeeklyExpensePage(),
       ),
     );
 
